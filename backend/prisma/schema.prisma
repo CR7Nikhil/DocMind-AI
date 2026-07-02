@@ -1,0 +1,70 @@
+// generator client {
+//   provider = "prisma-client-js"
+// }
+
+// datasource db {
+//   provider = "postgresql"
+//   url      = env("DATABASE_URL")
+// }
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String   @id @default(uuid())
+  email     String   @unique
+  name      String
+  password  String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  documents    Document[]
+  chatSessions ChatSession[]
+}
+
+model Document {
+  id          String   @id @default(uuid())
+  userId      String
+  name        String
+  originalName String
+  fileType    String
+  fileSize    Int
+  filePath    String
+  status      String   @default("processing") // processing | ready | failed
+  vectorIds   String[] // IDs stored in ChromaDB
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  user         User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+  chatSessions ChatSession[]
+}
+
+model ChatSession {
+  id         String    @id @default(uuid())
+  userId     String
+  documentId String
+  title      String    @default("New Chat")
+  createdAt  DateTime  @default(now())
+  updatedAt  DateTime  @updatedAt
+
+  user     User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  document Document  @relation(fields: [documentId], references: [id], onDelete: Cascade)
+  messages Message[]
+}
+
+model Message {
+  id            String   @id @default(uuid())
+  chatSessionId String
+  role          String   // user | assistant
+  content       String
+  sources       Json?    // retrieved chunks used for the answer
+  createdAt     DateTime @default(now())
+
+  chatSession ChatSession @relation(fields: [chatSessionId], references: [id], onDelete: Cascade)
+}
