@@ -2,9 +2,8 @@
 
 > Upload documents. Ask questions. Get instant AI-powered answers.
 
-[![CI/CD](https://github.com/yourusername/documind/actions/workflows/ci-cd.yml/badge.svg)](https://github.com/yourusername/documind/actions)
+[![CI/CD](https://github.com/CR7Nikhil/DocMind-AI/actions/workflows/ci-cd.yml/badge.svg)](https://github.com/CR7Nikhil/DocMind-AI/actions/workflows/ci-cd.yml)
 ![License](https://img.shields.io/badge/license-MIT-blue)
-
 ---
 
 ## 🚀 Tech Stack
@@ -31,14 +30,54 @@ documind/
 ├── docker-compose.yml
 └── .github/workflows/ci-cd.yml
 ```
+## 📸 Screenshots
 
+### 🏠 Landing Page
+
+![Landing Page](screenshots/landing-page.png)
+
+---
+
+### 📊 Dashboard
+
+![Dashboard](screenshots/dashboard.png)
+
+---
+
+### 🔐 Sign In
+
+![Sign In](screenshots/sign-in.png)
+
+---
+
+### 💬 Chat Interface
+
+![Chat Interface](screenshots/chat-page.png)
+
+---
+
+### 🤖 AI Conversation
+
+![Conversation](screenshots/conversation.png)
+
+---
+
+### ✨ Features
+
+![Features](screenshots/features.png)
+
+---
+
+### ⚙️ How It Works
+
+![How It Works](screenshots/how-it-works.png)
 ---
 
 ## 🛠️ Quick Start (Docker)
 
 ```bash
 # 1. Clone the repo
-git clone https://github.com/yourusername/documind.git
+git clone https://github.com/CR7Nikhil/DocMind-AI
 cd documind
 
 # 2. Set up environment variables
