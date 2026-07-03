@@ -8,5 +8,7 @@
     "ecmaVersion": "latest",
     "sourceType": "commonjs"
   },
-  "rules": {}
+  "rules": {
+    "no-unused-vars": "warn"
+  }
 }
