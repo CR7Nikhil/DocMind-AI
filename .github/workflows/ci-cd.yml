@@ -145,19 +145,22 @@ jobs:
           cache-from: type=gha
           cache-to: type=gha,mode=max
 
-  # ─── Deploy to Render ─────────────────────────────────────────────────────
+ # ─── Deploy to Render ─────────────────────────────────────────────────────
   deploy:
     name: 🚀 Deploy to Render
     runs-on: ubuntu-latest
     needs: build-docker
-    if: github.ref == 'refs/heads/main'
+    if: github.ref == 'refs/heads/main' && secrets.RENDER_DEPLOY_HOOK != ''
 
     steps:
       - name: Trigger Render deployment
         continue-on-error: true
         run: |
-          curl -X POST "${{ secrets.RENDER_DEPLOY_HOOK }}" \
-            -H "Content-Type: application/json"
+          if [ -n "$RENDER_DEPLOY_HOOK" ]; then
+            curl -X POST "$RENDER_DEPLOY_HOOK" -H "Content-Type: application/json"
+          else
+            echo "No deploy hook set, skipping."
+          fi
         env:
           RENDER_DEPLOY_HOOK: ${{ secrets.RENDER_DEPLOY_HOOK }}
 
